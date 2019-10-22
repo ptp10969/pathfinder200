@@ -1879,12 +1879,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       title: 'ABC Title',
-      detail: 'detail ABC'
+      detail: 'detail ABC',
+      cover: 'https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-0/p206x206/1925140_291703117645594_289027864_n.jpg?_nc_cat=105&_nc_oc=AQnKHvQf_C6ijoo7hSGLAwXT8bfoScMBjJvdmwEGnE8DQ-u0ntc_M8ipTBRlf-tTxoLZVx2U4buR5m1RS-VXTYnx&_nc_ht=scontent.fbkk10-1.fna&oh=ab789cc9bdce4fdf9e4d9d7585c3f2a7&oe=5E21F360',
+      like: 3
     };
+  },
+  props: ['id'],
+  methods: {
+    handleLike: function handleLike() {
+      this.like++;
+    }
   }
 });
 
@@ -37232,11 +37246,44 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h1", [_vm._v(_vm._s(_vm.title))]),
+    _vm.like > 2
+      ? _c("img", { attrs: { src: _vm.cover, title: "title", alt: "" } })
+      : _vm._e(),
     _vm._v(" "),
     _c("hr"),
     _vm._v(" "),
-    _c("p", [_vm._v(_vm._s(_vm.detail))])
+    _c("h1", [_vm._v(_vm._s(_vm.title) + _vm._s(_vm.id))]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("p", [_vm._v(_vm._s(_vm.detail))]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("p", [_vm._v(_vm._s(_vm.like))]),
+    _vm._v(" "),
+    _c("button", { on: { click: _vm.handleLike } }, [_vm._v("Like")]),
+    _vm._v(" "),
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.title,
+          expression: "title"
+        }
+      ],
+      attrs: { type: "text", name: "title" },
+      domProps: { value: _vm.title },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.title = $event.target.value
+        }
+      }
+    })
   ])
 }
 var staticRenderFns = []
