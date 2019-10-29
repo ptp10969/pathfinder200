@@ -27,3 +27,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile','UsersController@profile')->name('profile');
 Route::resource('/users','UsersController');
+
+Route::get('/test/api',function(){
+    return view('test-api');
+});

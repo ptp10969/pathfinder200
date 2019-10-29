@@ -6,9 +6,6 @@
         <hr>
         <p>{{detail}}</p>
         <hr>
-        <p>{{like}}</p>
-        <button v-on:click="handleLike">Like</button>
-        <input type="text" name="title" v-model="title">
     </div>
 </template>
 
@@ -18,14 +15,26 @@
             return {
                 title: 'ABC Title',
                 detail: 'detail ABC',
-                cover: 'https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-0/p206x206/1925140_291703117645594_289027864_n.jpg?_nc_cat=105&_nc_oc=AQnKHvQf_C6ijoo7hSGLAwXT8bfoScMBjJvdmwEGnE8DQ-u0ntc_M8ipTBRlf-tTxoLZVx2U4buR5m1RS-VXTYnx&_nc_ht=scontent.fbkk10-1.fna&oh=ab789cc9bdce4fdf9e4d9d7585c3f2a7&oe=5E21F360',
+                cover: 'https://media.tenor.com/images/ee62b5a4e7b7bc440eb38437f36b41a8/tenor.gif',
                 like: 3
             }
         },
         props : ['id'],
+        created(){
+            console.log('creating Post Component'+this.id);
+            this.callPostApi();
+            console.log('Post Component has been created'+this.id);  
+        },
         methods : {
-            handleLike() {
-                this.like++;
+            async callPostApi() {
+                try {
+                const res = await axios.get('/api/posts/' + this.id);
+                console.log(res.data);
+                if (res.status === 200){
+                    this.title = res.data.data.title;
+                    this.detail = res.data.data.detail;
+                }
+                } catch (e) {}
             }
         }
     }
